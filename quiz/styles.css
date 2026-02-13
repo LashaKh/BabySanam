@@ -1164,25 +1164,17 @@ body::before {
   }
 }
 
-/* Main title - "Finally." */
+/* Main title */
 .victory-title {
-  font-size: clamp(3rem, 12vw, 6rem);
+  font-size: clamp(3.5rem, 14vw, 7rem);
   font-weight: 900;
-  background: linear-gradient(
-    90deg,
-    #FFD700,
-    #FF1493,
-    #FFD700,
-    #FF69B4,
-    #FFD700
-  );
-  background-size: 300% auto;
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: gradientText 2s linear infinite;
-  filter: drop-shadow(0 0 40px rgba(255, 215, 0, 0.5));
-  margin-bottom: var(--spacing-sm);
+  color: #FFD700;
+  text-shadow:
+    0 0 30px rgba(255, 215, 0, 1),
+    0 0 60px rgba(255, 215, 0, 0.7),
+    0 0 100px rgba(255, 20, 147, 0.5),
+    0 2px 4px rgba(0, 0, 0, 0.8);
+  margin-bottom: var(--spacing-xs);
   letter-spacing: -0.02em;
 }
 
@@ -1246,10 +1238,10 @@ body::before {
 .victory-welcome {
   font-size: clamp(1.5rem, 5vw, 2.25rem);
   font-weight: 800;
-  color: var(--color-text);
+  color: var(--color-primary);
   margin-bottom: var(--spacing-md);
   animation: contentSlideUp 0.8s ease-out 0.7s backwards;
-  text-shadow: 0 2px 20px rgba(255, 255, 255, 0.3), 0 0 40px rgba(255, 20, 147, 0.4);
+  text-shadow: 0 0 20px rgba(255, 20, 147, 0.6), 0 0 40px rgba(255, 20, 147, 0.3);
 }
 
 /* Fun message */
@@ -1343,10 +1335,9 @@ body.victory-shake {
 
 /* Dyson victory image */
 .victory-image {
-  max-width: 280px;
-  max-height: 35vh;
-  border-radius: 16px;
-  margin: 0.75rem 0;
+  max-width: 520px;
+  max-height: 50vh;
+  margin: 0.5rem 0;
   object-fit: contain;
   opacity: 0;
   animation: contentSlideUp 0.8s ease-out 0.5s forwards;

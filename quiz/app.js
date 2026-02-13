@@ -428,7 +428,7 @@
       id: 6,
       type: 'valentine',
       question: "Your eyes.",
-      subtext: "When you look at me while you are fully mine.\n\nI see lots of passion in you. It's very attractive.\n\nI want to make you feel like that all the time.",
+      subtext: "When you look at me while you are fully mine.\n\nI see lots of passion in you. It's very attractive.\n\nI want to make you feel like that all the fucking time.",
       options: [
         { label: "Next card", behavior: 'normal' }
       ]
@@ -438,7 +438,7 @@
     {
       id: 7,
       type: 'valentine',
-      question: "You look lovely.",
+      question: "You have sense of style.",
       subtext: "When we're out, I'm proud of you.\n\nYou look lovely and you know how to be classy.\n\nI don't always fill you with compliments but I notice. Every time.",
       options: [
         { label: "Next card", behavior: 'normal' }
@@ -989,7 +989,13 @@
     updateProgress();
 
     const card = renderCard(cardData);
-    cardContainer.appendChild(card);
+    // Victory screen goes on body so it's truly fullscreen
+    // (cardContainer has perspective which breaks position:fixed)
+    if (cardData.type === 'victory') {
+      document.body.appendChild(card);
+    } else {
+      cardContainer.appendChild(card);
+    }
 
     // Trigger animation
     requestAnimationFrame(() => {
