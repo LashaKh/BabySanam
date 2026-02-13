@@ -516,7 +516,7 @@
       id: 14,
       type: 'valentine',
       question: "Your jealousy.",
-      subtext: "I like when you are jealous, it's funny. Mostly I don't give you any reason but it's cute.\n\nI don't plan to lose your trust by cheating, it's not in my plans. So don't worry my baby, you are my only interest.\n\nI want you fully integrated in my life and there is no more space for extra. You will perfectly fill it, I am sure.",
+      subtext: "I like when you are jealous, it's funny. Mostly I don't give you any reason but it's cute.\n\nI don't plan to lose your trust by cheating. So don't worry my baby, you are my only interest.\n\nI want you fully integrated in my life and there is no more space for extra. You will perfectly fill it, I am sure.",
       options: [
         { label: "Next card", behavior: 'normal' }
       ]
