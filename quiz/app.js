@@ -373,7 +373,7 @@
       id: 1,
       type: 'valentine',
       question: "So... why am I not with you today?",
-      subtext: "My 5 brothers and I rarely all get together.\nLike, almost never.\n\nAnd when the chance came up for all of us to go on a trip together... I couldn't say no.\n\nFamily is family.\n\nBut I wish you were here too.",
+      subtext: "My 4 brothers and I rarely all get together.\nLike, almost never.\n\nAnd when the chance came up for all of us to go on a trip together... I couldn't say no.\n\nFamily is family.\n\nBut I wish you were here too.",
       options: [
         { label: "I get it ❤️", behavior: 'normal' }
       ]
@@ -395,7 +395,7 @@
       id: 3,
       type: 'valentine',
       question: "Your curiosity.",
-      subtext: "You ask the silliest, loveliest questions.\n\nYou're curious about life, about past experiences, about everything.\n\nIt amuses me. You're full of energy and love of life.",
+      subtext: "You ask the funny, silly and lovely questions.\n\nYou're curious about life, about past experiences, about everything.\n\nIt amuses me. You're full of energy and full of love of the life. You are like a curious baby who wants to know everything at once, I am happy to educate you 😉",
       options: [
         { label: "Next card", behavior: 'normal' }
       ]
@@ -428,7 +428,7 @@
       id: 6,
       type: 'valentine',
       question: "Your eyes.",
-      subtext: "When you look at me while you are fully mine.\n\nI see lots of passion in you. It's very attractive.\n\nI want to make you feel like that all the fucking time.",
+      subtext: "When you look at me while you are fully mine.\n\nI witnessed this scene only twice but it's definitely my favourite sight from now on.\n\nI see lots of passion in you. It's very attractive.\n\nI want to make you feel like that all the fucking time.",
       options: [
         { label: "Next card", behavior: 'normal' }
       ]
@@ -450,7 +450,7 @@
       id: 8,
       type: 'valentine',
       question: "You calm me down.",
-      subtext: "I feel calm and relaxed when I hug you.\n\nSleeping next to you will be easy.\n\nAnd I hate sleeping with people.",
+      subtext: "I feel calm and relaxed when I hug you.\n\nSleeping next to you will be easy.\n\nAnd I hate sleeping with people. But you will be exception, I feel it.",
       options: [
         { label: "Next card", behavior: 'normal' }
       ]
@@ -461,7 +461,7 @@
       id: 9,
       type: 'valentine',
       question: "I'm a bully.",
-      subtext: "I'm rude and I make questionable jokes.\n\nBecause I don't want to hide who I am.\n\nI love bullying you. But it's my weird way to show love.",
+      subtext: "I'm rude and I make questionable jokes.\n\nBecause I don't want to hide who I am and it kind of helps me show you what's in my mind. I am not a good person but at least I am not boring.\n\nAnd I love bullying you. But know that it's just my weird way to show love.",
       options: [
         { label: "Next card", behavior: 'normal' }
       ]
@@ -472,7 +472,7 @@
       id: 10,
       type: 'valentine',
       question: "I just know.",
-      subtext: "We haven't spent lots of time together.\n\nBut I know when a person feels like yours.\n\nYou're my baby.",
+      subtext: "We haven't spent lots of time together.\n\nBut I know when a person feels like yours.\n\nAnd little Sanam, for sure you're my baby.",
       options: [
         { label: "Next card", behavior: 'normal' }
       ]
@@ -482,8 +482,8 @@
     {
       id: 11,
       type: 'valentine',
-      question: "About the future.",
-      subtext: "We might have different plans.\nYou want to study and live in China.\n\nI'll respect and support your choices.\n\nBut it doesn't matter how long we'll be together — I want to use every day to make this as happy for us as possible.",
+      question: "Your coffee skin.",
+      subtext: "I love your coffee skin.\n\nYou and coffee have lots in common. I love how coffee tastes and I love how you taste.\n\nI am addicted to coffee and I hope I can get addicted to you as well. I think you have full potential to make me feel that way. I believe in your skills.",
       options: [
         { label: "Next card", behavior: 'normal' }
       ]
@@ -493,16 +493,49 @@
     {
       id: 12,
       type: 'valentine',
-      question: "Your coffee skin.",
-      subtext: "I love your coffee skin.\n\nAnd the way you taste.",
+      question: "You're a smart girl.",
+      subtext: "I like how fast you learn and adapt.\n\nYou're a smart and clever girl. I call you stupid all the time but I don't really mean it.\n\nI think you will be a very successful woman in any field you choose.",
       options: [
         { label: "Next card", behavior: 'normal' }
       ]
     },
 
-    // Card 13: Will you be my Valentine?
+    // Card 13
     {
       id: 13,
+      type: 'valentine',
+      question: "Open up with me.",
+      subtext: "I really hope you fully open up with me. I want to be your closest friend, not just boyfriend.\n\nI want you to trust me 100%. I want you to ride my bike with me because I know you're gonna love it even though it scares you.\n\nI want the best for you in life. I want to see you brave and confident and capable to achieve anything you think you want.\n\nLife is short and it will seem even shorter if you live a boring and meaningless one, so let's just enjoy it as long as we can.",
+      options: [
+        { label: "Next card", behavior: 'normal' }
+      ]
+    },
+
+    // Card 14
+    {
+      id: 14,
+      type: 'valentine',
+      question: "Your jealousy.",
+      subtext: "I like when you are jealous, it's funny. Mostly I don't give you any reason but it's cute.\n\nI don't plan to lose your trust by cheating, it's not in my plans. So don't worry my baby, you are my only interest.\n\nI want you fully integrated in my life and there is no more space for extra. You will perfectly fill it, I am sure.",
+      options: [
+        { label: "Next card", behavior: 'normal' }
+      ]
+    },
+
+    // Card 15: About the future (last content card)
+    {
+      id: 15,
+      type: 'valentine',
+      question: "About the future.",
+      subtext: "We might have different plans.\nYou want to study and live in China.\n\nI'll respect and support your choices.\n\nBut it doesn't matter how long we'll be together — I want to use every day to make this as happy for us as possible.\n\n(But I hope we will last.)",
+      options: [
+        { label: "Next card", behavior: 'normal' }
+      ]
+    },
+
+    // Card 16: Will you be my Valentine?
+    {
+      id: 16,
       type: 'valentine',
       question: "Will you be my Valentine, Baby Sanam?",
       subtext: null,
@@ -512,9 +545,9 @@
       ]
     },
 
-    // Card 14: Victory (Dyson reveal)
+    // Card 17: Victory (Dyson reveal)
     {
-      id: 14,
+      id: 17,
       type: 'victory',
       question: "Good Girl!",
       subtext: null,
