@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="theme-color" content="#FF1493">
+  <title>Important Compatibility Assessment</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Click to Start Overlay (enables audio) -->
+  <div class="click-overlay" id="clickOverlay">
+    <div class="click-content">
+      <div class="click-icon">🏎️</div>
+      <div class="click-text">Tap to Start</div>
+    </div>
+  </div>
+
+  <!-- F1 Race Start Intro -->
+  <div class="f1-intro" id="f1Intro">
+    <div class="f1-speed-lines"></div>
+    <div class="f1-gantry">
+      <div class="f1-light" id="light1"></div>
+      <div class="f1-light" id="light2"></div>
+      <div class="f1-light" id="light3"></div>
+      <div class="f1-light" id="light4"></div>
+      <div class="f1-light" id="light5"></div>
+    </div>
+    <div class="f1-content">
+      <div class="f1-message" id="f1Message">
+        <span class="f1-lights-out">LIGHTS OUT</span>
+        <span class="f1-away">AND AWAY WE GO!</span>
+      </div>
+      <div class="f1-rules" id="f1Rules">
+        <div class="f1-greeting">Welcome, Baby Sanam!</div>
+        <div class="f1-title">COMPATIBILITY CHECK</div>
+        <div class="f1-subtitle">Ready to find out if we're meant to be?</div>
+        <div class="f1-tagline">15 laps. No pit stops. No escape.</div>
+      </div>
+      <button class="f1-start-btn" id="f1StartBtn">START ENGINE 🏁</button>
+    </div>
+  </div>
+
+  <!-- Aurora Background -->
+  <div class="aurora"></div>
+
+  <!-- Floating Particles -->
+  <div class="particles">
+    <div class="particle"></div>
+    <div class="particle heart"></div>
+    <div class="particle"></div>
+    <div class="particle heart"></div>
+    <div class="particle"></div>
+  </div>
+
+  <!-- Progress Indicator - Fixed to top right corner -->
+  <div class="progress">
+    <span class="lap-label">LAP</span>
+    <span class="lap-number">1</span>
+    <span class="lap-separator">/</span>
+    <span class="lap-total">15</span>
+  </div>
+
+  <div class="quiz-container">
+    <div class="card-container" id="cardContainer">
+      <!-- Cards will be rendered here by JavaScript -->
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

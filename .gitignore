@@ -1,0 +1,13 @@
+# Claude Code - may contain credentials
+.claude/settings.local.json
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
+
+# Node (if used later)
+node_modules/
