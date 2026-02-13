@@ -1,7 +1,6 @@
 /**
- * Girlfriend Quiz App
- * A fun, interactive quiz to ask Sanam to be my girlfriend
- * Features: 15 questions, misbehaving No button, compatibility score, premium confetti
+ * Valentine's Day Card for Sanam
+ * A heartfelt interactive card with animations and celebration
  */
 
 (function() {
@@ -255,8 +254,7 @@
     animate() {
       if (!this.isRunning) return;
 
-      this.ctx.fillStyle = 'rgba(0, 0, 0, 0.15)';
-      this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+      this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
       // Update rockets
       for (let i = this.rockets.length - 1; i >= 0; i--) {
@@ -348,216 +346,180 @@
   // ============================================
   const quizState = {
     currentCardIndex: 0,
-    noButtonAttempts: 0,
     isComplete: false,
-    score: (94 + Math.random() * 4).toFixed(1), // Random 94-98%
     isTransitioning: false
   };
 
   // ============================================
   // Questions Data
   // ============================================
+  // Counter for "No" clicks on the Valentine question card
+  let valentineNoCount = 0;
+
   const questions = [
     // Card 0: Greeting
     {
       id: 0,
       type: 'greeting',
-      question: "Greetings, Miss Sanam.",
-      subtext: "You've been selected for a very important compatibility assessment.\n\n(You cannot decline. I already know where you live.)",
+      question: "Happy Valentine's Day, Sanam.",
+      subtext: "I made this for you.\nBecause I couldn't be there in person.\n\nSo here's the next best thing.",
       options: [
-        { label: "Proceed with caution", behavior: 'normal' },
-        { label: "Call the police", behavior: 'disabled', feedback: "Nice try." }
+        { label: "Okay, show me", behavior: 'normal' }
       ]
     },
 
-    // Card 1: Setup
+    // Card 1: Why I'm not there
     {
       id: 1,
-      type: 'question',
-      question: "Just a few clarifying questions.",
-      subtext: "This will be fun.\n(For me. Unclear about you.)",
+      type: 'valentine',
+      question: "So... why am I not with you today?",
+      subtext: "My 5 brothers and I rarely all get together.\nLike, almost never.\n\nAnd when the chance came up for all of us to go on a trip together... I couldn't say no.\n\nFamily is family.\n\nBut I wish you were here too.",
       options: [
-        { label: "I'm scared", behavior: 'normal' },
-        { label: "Get on with it", behavior: 'normal' },
-        { label: "Is this legally binding?", behavior: 'normal', feedback: "We'll see." }
+        { label: "I get it ❤️", behavior: 'normal' }
       ]
     },
 
-    // Card 2: Memory Pitch
+    // Card 2: Transition
     {
       id: 2,
-      type: 'question',
-      question: "Do you want your life to be less boring, more exciting?",
-      subtext: "Maybe something that you will remember when you are old?\n\nDon't worry. Dr. Lk got you.",
+      type: 'valentine',
+      question: "But while I'm away...",
+      subtext: "I want to tell you some things I like about you.\n\nAnd explain a few things too.\n\nSo keep scrolling.",
       options: [
-        { label: "Yes, my life needs this", behavior: 'normal' },
-        { label: "I'm already exciting enough", behavior: 'normal', feedback: "Sure you are." },
-        { label: "Who is Dr. Lk?", behavior: 'normal', feedback: "Dr. LK: The man. The legend. Contributor to your interesting life." }
+        { label: "I'm listening", behavior: 'normal' }
       ]
     },
 
-    // Card 3: Friend Situation
+    // Card 3
     {
       id: 3,
-      type: 'question',
-      question: "Do you want at least ONE real friend?",
-      subtext: "Because let's be honest...\nyour current situation is sad. no one loves you, no one needs you.",
+      type: 'valentine',
+      question: "Your curiosity.",
+      subtext: "You ask the silliest, loveliest questions.\n\nYou're curious about life, about past experiences, about everything.\n\nIt amuses me. You're full of energy and love of life.",
       options: [
-        { label: "I feel attacked but yes", behavior: 'normal' },
-        { label: "I have friends!", behavior: 'normal', feedback: "Name three. Without googling." },
-        { label: "Ouch. But fair.", behavior: 'normal' }
+        { label: "Next card", behavior: 'normal' }
       ]
     },
 
-    // Card 4: Compliments Package
+    // Card 4
     {
       id: 4,
-      type: 'question',
-      question: "What about someone who will give you at least 5 compliments per day?",
-      subtext: "(Quality may vary. Quantity guaranteed.)",
+      type: 'valentine',
+      question: "Your voice.",
+      subtext: "The way you sing with your lovely voice while listening to music.\n\nWhile you hug me.\n\nLove listening to that.",
       options: [
-        { label: "My ego needs this", behavior: 'normal' },
-        { label: "Only 5?", behavior: 'normal', feedback: "Don't be greedy." },
-        { label: "What kind of compliments?", behavior: 'normal', feedback: "70% genuine, 30% sarcastic. You won't know which is which." }
+        { label: "Next card", behavior: 'normal' }
       ]
     },
 
-    // Card 5: Lemon Fizzy Water
+    // Card 5
     {
       id: 5,
-      type: 'question',
-      question: "Need a personal damage control specialist?",
-      subtext: "We both know what happens after drink #3.\n\n(You're welcome, by the way.)",
+      type: 'valentine',
+      question: "Your hands.",
+      subtext: "There's energy in your fingers when you pet my hair like I'm a cat.\n\nYou could stop my headache just like that.\n\nThat means a lot.",
       options: [
-        { label: "I can handle my drinks!", behavior: 'normal', feedback: "Girl, you can barely handle standing." },
-        { label: "...fine, I need supervision", behavior: 'normal' },
-        { label: "The lemon water does help", behavior: 'normal', feedback: "I know. I've seen the recovery speed." }
+        { label: "Next card", behavior: 'normal' }
       ]
     },
 
-    // Card 6: Amazon Upgrade
+    // Card 6
     {
       id: 6,
-      type: 'question',
-      question: "Maybe someone who can give you an Amazon account?",
-      subtext: "So you can finally stop shopping on Temu like a war refugee.\n\nYour clothes won't dissolve in the wash.\nRevolutionary concept, I know.",
+      type: 'valentine',
+      question: "Your eyes.",
+      subtext: "When you look at me while you are fully mine.\n\nI see lots of passion in you. It's very attractive.\n\nI want to make you feel like that all the time.",
       options: [
-        { label: "I feel personally attacked", behavior: 'normal', feedback: "Good." },
-        { label: "Temu has good stuff!", behavior: 'normal', feedback: "Your dissolving wardrobe disagrees." },
-        { label: "Finally, a real upgrade", behavior: 'normal' }
+        { label: "Next card", behavior: 'normal' }
       ]
     },
 
-    // Card 7: Valentine Proposal
+    // Card 7
     {
       id: 7,
-      type: 'question',
-      question: "Need a Valentine?",
-      subtext: "It's in a couple of days.\nI'm available.\nYou're... also available. Obviously.\n\nLet's not pretend you had other options other than flower sending landlords.",
+      type: 'valentine',
+      question: "You look lovely.",
+      subtext: "When we're out, I'm proud of you.\n\nYou look lovely and you know how to be classy.\n\nI don't always fill you with compliments but I notice. Every time.",
       options: [
-        { label: "I have other options!", behavior: 'normal', feedback: "I am the cutest." },
-        { label: "This feels like a trap", behavior: 'normal', feedback: "I spent like 2 hours on this so I guess I am the one trapped." },
-        { label: "Fine. What's the plan?", behavior: 'normal', feedback: "Bold of you to assume there's a plan." }
+        { label: "Next card", behavior: 'normal' }
       ]
     },
 
-    // Card 8: Party Clause
+    // Card 8
     {
       id: 8,
-      type: 'question',
-      question: "Need a party?",
-      subtext: "Just call.\nI'll take you to the places I've been 100 times.\nWhere I spent my most precious and healthy years drinking like a bomj.\n\nLovely experience.\nI'll whisper toxic ideas in your ear in a way you're gonna love.",
+      type: 'valentine',
+      question: "You calm me down.",
+      subtext: "I feel calm and relaxed when I hug you.\n\nSleeping next to you will be easy.\n\nAnd I hate sleeping with people.",
       options: [
-        { label: "That sounds... concerning", behavior: 'normal', feedback: "That's the fun part." },
-        { label: "What kind of toxic ideas?", behavior: 'normal', feedback: "The kind that feel right at 2am." },
-        { label: "I'm intrigued", behavior: 'normal' }
+        { label: "Next card", behavior: 'normal' }
       ]
     },
 
-    // Card 9: Toxicity Offering
+    // Card 9
     {
       id: 9,
-      type: 'question',
-      question: "Need a bit of toxicity and drama?",
-      subtext: "I can deliver.\n\nNot too much. Just enough to keep things interesting and your friends worried.",
+      type: 'valentine',
+      question: "I'm a bully.",
+      subtext: "I'm rude and I make questionable jokes.\n\nBecause I don't want to hide who I am.\n\nI love bullying you. But it's my weird way to show love.",
       options: [
-        { label: "Finally, honesty in advertising", behavior: 'normal' },
-        { label: "Define 'a bit'", behavior: 'normal', feedback: "Enough for stories, not enough for court." },
-        { label: "I'm trying to heal actually", behavior: 'normal', feedback: "Healing is boring. Next question." }
+        { label: "Next card", behavior: 'normal' }
       ]
     },
 
-    // Card 10: Self-Assessment
+    // Card 10
     {
       id: 10,
-      type: 'question',
-      question: "Look, I might not be your type.",
-      subtext: "But I am definitely, uniquely fucked up in a way you're gonna enjoy.",
+      type: 'valentine',
+      question: "I just know.",
+      subtext: "We haven't spent lots of time together.\n\nBut I know when a person feels like yours.\n\nYou're my baby.",
       options: [
-        { label: "I feel called out", behavior: 'normal', feedback: "Good. Someone had to say it." },
-        { label: "Define 'fucked up'", behavior: 'normal', feedback: "Entertaining enough to keep. Broken enough to understand you." },
-        { label: "I like normal guys", behavior: 'normal', feedback: "No you don't, you like me." }
+        { label: "Next card", behavior: 'normal' }
       ]
     },
 
-    // Card 11: Recap Card (fullscreen, no card box)
+    // Card 11
     {
       id: 11,
-      type: 'recap',
-      question: "What's on the table:",
-      subtext: "✓ Memories you'll never forget\n✓ An actual friend (rare find)\n✓ Daily compliments (5 minimum)\n✓ Post-drunk hydration service\n✓ Amazon account upgrade\n✓ Valentine sorted\n✓ On-call party companion\n✓ Personal attack dog for rude people\n✓ Premium toxicity (controlled doses)\n✓ Entertainment value (guaranteed)\n\nThis is a limited time offer.\n(It's not. But sounds better.)",
+      type: 'valentine',
+      question: "About the future.",
+      subtext: "We might have different plans.\nYou want to study and live in China.\n\nI'll respect and support your choices.\n\nBut it doesn't matter how long we'll be together — I want to use every day to make this as happy for us as possible.",
       options: [
-        { label: "This is a lot", behavior: 'normal' },
-        { label: "I've seen worse deals", behavior: 'normal' },
-        { label: "What's the catch?", behavior: 'normal', feedback: "You have to put up with me." }
+        { label: "Next card", behavior: 'normal' }
       ]
     },
 
-    // Card 12: Compatibility Score
+    // Card 12
     {
       id: 12,
-      type: 'score',
-      question: "Calculating compatibility...",
-      subtext: null,
+      type: 'valentine',
+      question: "Your coffee skin.",
+      subtext: "I love your coffee skin.\n\nAnd the way you taste.",
       options: [
-        { label: "I wonder who's being difficult", behavior: 'normal' },
-        { label: "This feels rigged", behavior: 'normal', feedback: "It is. Your point?" },
-        { label: "Only " + quizState.score + "%?", behavior: 'normal', feedback: "The remaining " + (100 - parseFloat(quizState.score)).toFixed(1) + "% is your stubbornness." }
+        { label: "Next card", behavior: 'normal' }
       ]
     },
 
-    // Card 13: THE FINAL QUESTION
+    // Card 13: Will you be my Valentine?
     {
       id: 13,
-      type: 'final',
-      question: "Will you be my girlfriend?",
-      subtext: "Okay. Enough games.\n\nYou scrolled through all of this.\nYou're still here.\nWe both know what that means.",
+      type: 'valentine',
+      question: "Will you be my Valentine, Baby Sanam?",
+      subtext: null,
       options: [
-        { label: "Yes", behavior: 'normal', isCorrect: true },
-        { label: "Absolutely not", behavior: 'escalating-escape' }
+        { label: "Yes ❤️", behavior: 'normal' },
+        { label: "No", behavior: 'valentine-no' }
       ]
     },
 
-    // Card 14: Victory
+    // Card 14: Victory (Dyson reveal)
     {
       id: 14,
       type: 'victory',
-      question: "Finally.",
-      subtext: "Status: Girlfriend (official)\nEffective: Right now\nDuration: TBD\n\nTerms & Conditions:\n• No refunds\n• Complaining is allowed\n• Escape attempts will be noted\n\nWelcome aboard, Miss Sanam.\n\nThis is going to be fun.\n(For me. Still unclear about you.)\n\n🏁 P1 - Champion of my heart",
+      question: "Good Girl!",
+      subtext: null,
       options: []
     }
-  ];
-
-  // ============================================
-  // No Button Escalation States
-  // ============================================
-  const noButtonStates = [
-    { attempts: 1, action: 'dodge', text: 'Absolutely not' },
-    { attempts: 2, action: 'dodge', text: 'Absolutely not' },
-    { attempts: 3, action: 'dodge-shrink', text: 'Reconsider' },
-    { attempts: 4, action: 'shrink', text: 'Think again' },
-    { attempts: 5, action: 'tiny', text: 'Please?' },
-    { attempts: 6, action: 'disappear', text: null }
   ];
 
   // ============================================
@@ -904,31 +866,21 @@
 
     // Event delegation for button clicks
     cardContainer.addEventListener('click', handleClick);
-    cardContainer.addEventListener('pointerenter', handlePointerEnter, true);
   }
 
   // ============================================
   // Card Rendering
   // ============================================
   function renderCard(cardData) {
-    // Special rendering for final question (no card container)
-    if (cardData.type === 'final') {
-      return renderFinalScreen(cardData);
-    }
-
     // Special rendering for victory (fullscreen celebration)
     if (cardData.type === 'victory') {
       return renderVictoryScreen(cardData);
     }
 
-    // Special rendering for recap (fullscreen list, no card box)
-    if (cardData.type === 'recap') {
-      return renderRecapScreen(cardData);
-    }
-
     const card = document.createElement('div');
     // Add type-specific class for special styling
-    const typeClass = cardData.type === 'greeting' ? 'greeting' : '';
+    const typeClass = cardData.type === 'greeting' ? 'greeting' :
+                      cardData.type === 'valentine' ? 'valentine' : '';
     card.className = `card ${typeClass}`.trim();
     card.dataset.cardId = cardData.id;
 
@@ -938,22 +890,13 @@
       content += `<div class="subtext">${cardData.subtext}</div>`;
     }
 
-    // Score display for score card
-    if (cardData.type === 'score') {
-      content += `
-        <div class="score-label">Compatibility Score</div>
-        <div class="score-display" id="scoreDisplay">0.0%</div>
-      `;
-    }
-
     // Options
     if (cardData.options && cardData.options.length > 0) {
       content += '<div class="options">';
       cardData.options.forEach((option, index) => {
         const isDisabled = option.behavior === 'disabled' ? 'disabled' : '';
-        const isNoButton = option.behavior === 'escalating-escape' ? 'data-no-button="true"' : '';
         content += `
-          <button class="btn" ${isDisabled} ${isNoButton} data-option-index="${index}">
+          <button class="btn" ${isDisabled} data-option-index="${index}">
             ${option.label}
           </button>
         `;
@@ -963,139 +906,6 @@
 
     card.innerHTML = content;
     return card;
-  }
-
-  // Render final question as fullscreen (no card)
-  function renderFinalScreen(cardData) {
-    const screen = document.createElement('div');
-    screen.className = 'final-question-screen';
-    screen.dataset.cardId = cardData.id;
-
-    // Question text
-    const question = document.createElement('div');
-    question.className = 'final-question';
-    question.textContent = cardData.question;
-    screen.appendChild(question);
-
-    // Subtext
-    if (cardData.subtext) {
-      const subtext = document.createElement('div');
-      subtext.className = 'final-subtext';
-      subtext.textContent = cardData.subtext;
-      screen.appendChild(subtext);
-    }
-
-    // Yes button (fixed at bottom center)
-    const yesBtn = document.createElement('button');
-    yesBtn.className = 'btn final-yes-btn';
-    yesBtn.textContent = 'Yes';
-    yesBtn.dataset.optionIndex = '0';
-    screen.appendChild(yesBtn);
-
-    // No button (fixed, will roam the screen)
-    const noBtn = document.createElement('button');
-    noBtn.className = 'btn final-no-btn';
-    noBtn.textContent = 'Absolutely not';
-    noBtn.dataset.optionIndex = '1';
-    noBtn.dataset.noButton = 'true';
-    // Initial position using LEFT for consistent smooth animations
-    noBtn.style.left = (window.innerWidth - 220) + 'px';
-    noBtn.style.top = '100px';
-    screen.appendChild(noBtn);
-
-    // Setup cursor-aware smooth dodge
-    setTimeout(() => setupCursorDodge(noBtn), 100);
-
-    return screen;
-  }
-
-  // ============================================
-  // Cursor-Aware Smooth Dodge System
-  // ============================================
-  function setupCursorDodge(btn) {
-    let isMoving = false;
-    let lastMoveTime = 0;
-    const dodgeRadius = 150;
-    const moveThrottle = 200;
-    const margin = 60;
-
-    function getDistance(x1, y1, x2, y2) {
-      return Math.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2);
-    }
-
-    function clamp(val, min, max) {
-      return Math.max(min, Math.min(max, val));
-    }
-
-    function smoothDodge(cursorX, cursorY) {
-      if (isMoving || btn.classList.contains('hidden') || !btn.isConnected) return;
-
-      const now = Date.now();
-      if (now - lastMoveTime < moveThrottle) return;
-
-      const rect = btn.getBoundingClientRect();
-      const btnCenterX = rect.left + rect.width / 2;
-      const btnCenterY = rect.top + rect.height / 2;
-      const distance = getDistance(cursorX, cursorY, btnCenterX, btnCenterY);
-
-      if (distance > dodgeRadius) return;
-
-      isMoving = true;
-      lastMoveTime = now;
-
-      // Direction away from cursor
-      let dx = btnCenterX - cursorX;
-      let dy = btnCenterY - cursorY;
-      const len = Math.sqrt(dx * dx + dy * dy) || 1;
-      dx /= len;
-      dy /= len;
-
-      // Faster escape when closer
-      const escapeForce = Math.max(1, (dodgeRadius - distance) / 50);
-      const dodgeX = dx * (150 + Math.random() * 100) * escapeForce;
-      const dodgeY = dy * (100 + Math.random() * 80) * escapeForce;
-
-      // Randomness
-      const randomX = (Math.random() - 0.5) * 80;
-      const randomY = (Math.random() - 0.5) * 60;
-
-      let newX = rect.left + dodgeX + randomX;
-      let newY = rect.top + dodgeY + randomY;
-
-      // Clamp to screen
-      const maxX = window.innerWidth - rect.width - margin;
-      const maxY = window.innerHeight - rect.height - margin;
-      newX = clamp(newX, margin, maxX);
-      newY = clamp(newY, margin, maxY);
-
-      // If still too close, jump to opposite side
-      const newCenterX = newX + rect.width / 2;
-      const newCenterY = newY + rect.height / 2;
-      if (getDistance(cursorX, cursorY, newCenterX, newCenterY) < dodgeRadius * 0.6) {
-        newX = cursorX < window.innerWidth / 2 ? maxX - Math.random() * 100 : margin + Math.random() * 100;
-        newY = cursorY < window.innerHeight / 2 ? maxY - Math.random() * 100 : margin + 80 + Math.random() * 100;
-      }
-
-      btn.style.left = newX + 'px';
-      btn.style.top = newY + 'px';
-
-      if (Math.random() > 0.5) SoundManager.play('dodge');
-
-      setTimeout(() => { isMoving = false; }, moveThrottle);
-    }
-
-    const onMouseMove = (e) => smoothDodge(e.clientX, e.clientY);
-    const onTouchMove = (e) => {
-      if (e.touches.length > 0) smoothDodge(e.touches[0].clientX, e.touches[0].clientY);
-    };
-
-    document.addEventListener('mousemove', onMouseMove);
-    document.addEventListener('touchmove', onTouchMove, { passive: true });
-
-    btn._cleanupDodge = () => {
-      document.removeEventListener('mousemove', onMouseMove);
-      document.removeEventListener('touchmove', onTouchMove);
-    };
   }
 
   // Render recap as fullscreen (no card box)
@@ -1147,50 +957,24 @@
     screen.className = 'victory-screen';
     screen.dataset.cardId = cardData.id;
 
-    // Main title
+    // Main title - "Good Girl!"
     const title = document.createElement('div');
     title.className = 'victory-title';
     title.textContent = cardData.question;
     screen.appendChild(title);
 
-    // Status section
-    const statusSection = document.createElement('div');
-    statusSection.className = 'victory-status';
-    statusSection.innerHTML = `
-      <div class="status-line"><span class="status-label">Status:</span> <span class="status-value highlight">Girlfriend (official)</span></div>
-      <div class="status-line"><span class="status-label">Effective:</span> <span class="status-value">Right now</span></div>
-      <div class="status-line"><span class="status-label">Duration:</span> <span class="status-value">TBD</span></div>
-    `;
-    screen.appendChild(statusSection);
+    // Dyson image
+    const img = document.createElement('img');
+    img.src = 'dyson.webp';
+    img.alt = 'Dyson';
+    img.className = 'victory-image';
+    screen.appendChild(img);
 
-    // Terms section
-    const termsSection = document.createElement('div');
-    termsSection.className = 'victory-terms';
-    termsSection.innerHTML = `
-      <div class="terms-title">Terms & Conditions:</div>
-      <div class="terms-item">• No refunds</div>
-      <div class="terms-item">• Complaining is allowed</div>
-      <div class="terms-item">• Escape attempts will be noted</div>
-    `;
-    screen.appendChild(termsSection);
-
-    // Welcome message
-    const welcome = document.createElement('div');
-    welcome.className = 'victory-welcome';
-    welcome.textContent = 'Welcome aboard, Miss Sanam.';
-    screen.appendChild(welcome);
-
-    // Fun message
-    const funMsg = document.createElement('div');
-    funMsg.className = 'victory-fun';
-    funMsg.innerHTML = `This is going to be fun.<br><span class="fun-note">(For me. Still unclear about you.)</span>`;
-    screen.appendChild(funMsg);
-
-    // Champion badge
-    const badge = document.createElement('div');
-    badge.className = 'victory-badge';
-    badge.innerHTML = '🏁 P1 - Champion of my heart';
-    screen.appendChild(badge);
+    // Message
+    const message = document.createElement('div');
+    message.className = 'victory-welcome';
+    message.textContent = 'You won Dyson.';
+    screen.appendChild(message);
 
     return screen;
   }
@@ -1209,18 +993,13 @@
 
     // Trigger animation
     requestAnimationFrame(() => {
-      // Final and victory screens don't use .card class
-      if (cardData.type === 'final' || cardData.type === 'victory') {
+      // Victory screen doesn't use .card class
+      if (cardData.type === 'victory') {
         // Already has fade-in animation via CSS
         SoundManager.play('whoosh');
       } else {
         card.classList.add('active', 'entering');
         SoundManager.play('whoosh');
-      }
-
-      // Animate score if it's the score card
-      if (cardData.type === 'score') {
-        setTimeout(() => animateScore(), 500);
       }
 
       // Spawn confetti and fireworks for victory
@@ -1238,8 +1017,8 @@
       }
     });
 
-    // Remove entering class after animation (not for final or victory screen)
-    if (cardData.type !== 'final' && cardData.type !== 'victory') {
+    // Remove entering class after animation (not for victory screen)
+    if (cardData.type !== 'victory') {
       setTimeout(() => {
         card.classList.remove('entering');
       }, 700);
@@ -1247,24 +1026,15 @@
   }
 
   function hideCard(callback) {
-    // Check for regular card or final screen
-    const currentCard = cardContainer.querySelector('.card.active') ||
-                        cardContainer.querySelector('.final-question-screen');
+    const currentCard = cardContainer.querySelector('.card.active');
     if (!currentCard) {
       if (callback) callback();
       return;
     }
 
     quizState.isTransitioning = true;
-
-    // Handle final screen differently (no .active class)
-    if (currentCard.classList.contains('final-question-screen')) {
-      currentCard.style.opacity = '0';
-      currentCard.style.transition = 'opacity 0.5s ease';
-    } else {
-      currentCard.classList.remove('active');
-      currentCard.classList.add('exiting');
-    }
+    currentCard.classList.remove('active');
+    currentCard.classList.add('exiting');
 
     setTimeout(() => {
       currentCard.remove();
@@ -1302,9 +1072,26 @@
     // Mark button as selected
     markButtonSelected(btn);
 
-    // Handle No button special behavior
-    if (btn.dataset.noButton === 'true') {
-      handleNoButtonClick(btn);
+    // Handle "No" on the Valentine question card
+    if (option.behavior === 'valentine-no') {
+      const jokes = [
+        "I know you don't mean that. Try again.",
+        "Girl, you scrolled through all of this. We both know the answer.",
+        "I'll wait.",
+        "You're running out of excuses, Sanam.",
+        "Fine. But the Dyson won't wait forever."
+      ];
+      const jokeIndex = Math.min(valentineNoCount, jokes.length - 1);
+      const joke = valentineNoCount >= jokes.length ? "Just click Yes already." : jokes[jokeIndex];
+      valentineNoCount++;
+      showFeedback(joke);
+      // Reset button states so she can click again
+      const currentCard = cardContainer.querySelector('.card.active');
+      if (currentCard) {
+        currentCard.querySelectorAll('.btn:not(.next-btn)').forEach(b => {
+          b.classList.remove('selected', 'not-selected');
+        });
+      }
       return;
     }
 
@@ -1322,100 +1109,12 @@
       return;
     }
 
-    // Victory check
-    if (option.isCorrect && cardData.type === 'final') {
-      quizState.isComplete = true;
-      advanceToNextCard();
-      return;
-    }
-
-    // Show Next button instead of auto-advancing
-    showNextButton();
-  }
-
-  function handlePointerEnter(e) {
-    const btn = e.target.closest('.btn[data-no-button="true"]');
-    if (!btn || e.pointerType !== 'mouse') return;
-
-    // Skip for final screen - it uses smooth cursor-tracking dodge
-    if (btn.classList.contains('final-no-btn')) return;
-
-    // Trigger dodge on hover for other screens
-    handleNoButtonHover(btn);
-  }
-
-  function handleNoButtonClick(btn) {
-    quizState.noButtonAttempts++;
-    const state = noButtonStates.find(s => s.attempts === quizState.noButtonAttempts)
-                 || noButtonStates[noButtonStates.length - 1];
-
-    // Check if we're on the final question (fullscreen mode)
-    const isFinalScreen = btn.classList.contains('final-no-btn');
-
-    switch (state.action) {
-      case 'dodge':
-        SoundManager.play('dodge');
-        if (isFinalScreen) {
-          dodgeButtonFullscreen(btn, quizState.noButtonAttempts);
-        } else {
-          dodgeButton(btn);
-        }
-        break;
-      case 'dodge-shrink':
-        SoundManager.play('dodge');
-        if (isFinalScreen) {
-          dodgeButtonFullscreen(btn, quizState.noButtonAttempts);
-          btn.classList.add('shrinking');
-          btn.style.transform = 'scale(0.85)';
-        } else {
-          dodgeButton(btn);
-          shrinkButton(btn, 0.85);
-        }
-        if (state.text) btn.textContent = state.text;
-        break;
-      case 'shrink':
-        SoundManager.play('shrink');
-        if (isFinalScreen) {
-          dodgeButtonFullscreen(btn, quizState.noButtonAttempts);
-          btn.classList.add('shrinking');
-          btn.style.transform = 'scale(0.7)';
-        } else {
-          shrinkButton(btn, 0.7);
-        }
-        if (state.text) btn.textContent = state.text;
-        break;
-      case 'tiny':
-        SoundManager.play('tiny');
-        if (isFinalScreen) {
-          dodgeButtonFullscreen(btn, quizState.noButtonAttempts);
-          btn.classList.add('shrinking');
-          btn.style.transform = 'scale(0.5)';
-        } else {
-          shrinkButton(btn, 0.5);
-        }
-        if (state.text) btn.textContent = state.text;
-        break;
-      case 'disappear':
-        SoundManager.play('poof');
-        disappearButton(btn);
-        break;
-    }
-  }
-
-  function handleNoButtonHover(btn) {
-    if (quizState.noButtonAttempts < 2) {
-      const isFinalScreen = btn.classList.contains('final-no-btn');
-      if (isFinalScreen) {
-        dodgeButtonFullscreen(btn, quizState.noButtonAttempts);
-      } else {
-        dodgeButton(btn);
-      }
-    }
+    // Advance to next card
+    advanceToNextCard();
   }
 
   function markButtonSelected(selectedBtn) {
-    const currentCard = cardContainer.querySelector('.card.active') ||
-                        cardContainer.querySelector('.final-question-screen');
+    const currentCard = cardContainer.querySelector('.card.active');
     if (!currentCard) return;
 
     // Clear existing feedback when selecting a new option
@@ -1424,8 +1123,8 @@
       existingFeedback.remove();
     }
 
-    // Get all option buttons (not next-btn, final-yes-btn, final-no-btn)
-    const allBtns = currentCard.querySelectorAll('.btn:not(.next-btn):not(.final-yes-btn):not(.final-no-btn)');
+    // Get all option buttons (not next-btn)
+    const allBtns = currentCard.querySelectorAll('.btn:not(.next-btn)');
 
     allBtns.forEach(btn => {
       if (btn === selectedBtn) {
@@ -1471,15 +1170,22 @@
   }
 
   function updateProgress() {
-    const displayIndex = Math.min(quizState.currentCardIndex + 1, 15);
+    const totalCards = questions.length;
+    const displayIndex = Math.min(quizState.currentCardIndex + 1, totalCards);
     if (progressNumber) {
       progressNumber.textContent = displayIndex;
     }
 
-    // Hide progress on victory
+    // Update total count
+    const lapTotal = document.querySelector('.lap-total');
+    if (lapTotal) {
+      lapTotal.textContent = totalCards;
+    }
+
+    // Hide progress on victory (last card)
     const progress = document.querySelector('.progress');
     if (progress) {
-      progress.style.opacity = quizState.currentCardIndex >= 15 ? '0' : '1';
+      progress.style.opacity = quizState.currentCardIndex >= totalCards - 1 ? '0' : '1';
     }
   }
 
@@ -1531,206 +1237,6 @@
     const currentCard = cardContainer.querySelector('.card.active');
     if (currentCard) {
       currentCard.appendChild(feedback);
-    }
-  }
-
-  // ============================================
-  // No Button Misbehavior
-  // ============================================
-  function dodgeButton(btn) {
-    const container = btn.closest('.options');
-    if (!container) return;
-
-    const containerRect = container.getBoundingClientRect();
-    const btnRect = btn.getBoundingClientRect();
-
-    // Calculate random position within container bounds
-    const maxX = containerRect.width - btnRect.width;
-    const maxY = Math.min(100, containerRect.height);
-
-    const randomX = (Math.random() - 0.5) * maxX * 0.8;
-    const randomY = (Math.random() - 0.5) * maxY;
-
-    btn.classList.add('dodging');
-    btn.style.transform = `translate(${randomX}px, ${randomY}px)`;
-
-    setTimeout(() => {
-      btn.classList.remove('dodging');
-    }, 200);
-  }
-
-  // Full-screen dodge for final question
-  function dodgeButtonFullscreen(btn, attempt) {
-    const margin = 60;
-    const btnRect = btn.getBoundingClientRect();
-
-    // Calculate available area
-    let maxX = window.innerWidth - btnRect.width - margin;
-    let maxY = window.innerHeight - btnRect.height - margin;
-    let minY = margin;
-
-    // After attempt 4, restrict to bottom half and slow down
-    if (attempt >= 4) {
-      minY = window.innerHeight / 2;
-      btn.classList.add('trembling');
-    }
-
-    // Calculate new position
-    let newX = margin + Math.random() * (maxX - margin);
-    let newY = minY + Math.random() * (maxY - minY);
-
-    // Apply position
-    btn.style.left = newX + 'px';
-    btn.style.top = newY + 'px';
-    btn.style.right = 'auto';
-  }
-
-  function shrinkButton(btn, scale) {
-    btn.classList.add('shrinking');
-    btn.style.transform = `scale(${scale})`;
-  }
-
-  function disappearButton(btn) {
-    btn.classList.add('hidden');
-
-    const isFinalScreen = btn.classList.contains('final-no-btn');
-
-    // Add second Yes button
-    setTimeout(() => {
-      if (isFinalScreen) {
-        // For final screen, add another Yes button somewhere on screen
-        const finalScreen = btn.closest('.final-question-screen');
-        if (finalScreen) {
-          const secondYes = document.createElement('button');
-          secondYes.className = 'btn final-yes-btn';
-          secondYes.textContent = 'Yes';
-          secondYes.dataset.optionIndex = '0';
-          secondYes.style.opacity = '0';
-          secondYes.style.bottom = '140px'; // Position above the other Yes
-          secondYes.style.transform = 'translateX(-50%) scale(0.8)';
-          finalScreen.appendChild(secondYes);
-
-          requestAnimationFrame(() => {
-            secondYes.style.transition = 'all 0.3s ease';
-            secondYes.style.opacity = '1';
-            secondYes.style.transform = 'translateX(-50%) scale(1)';
-          });
-
-          secondYes.addEventListener('click', () => {
-            quizState.isComplete = true;
-            advanceToNextCard();
-          });
-        }
-      } else {
-        const options = btn.closest('.options');
-        if (options) {
-          const secondYes = document.createElement('button');
-          secondYes.className = 'btn';
-          secondYes.textContent = 'Yes';
-          secondYes.dataset.optionIndex = '0';
-          secondYes.style.opacity = '0';
-          secondYes.style.transform = 'scale(0.8)';
-          options.appendChild(secondYes);
-
-          requestAnimationFrame(() => {
-            secondYes.style.transition = 'all 0.3s ease';
-            secondYes.style.opacity = '1';
-            secondYes.style.transform = 'scale(1)';
-          });
-
-          // Update first Yes button's data to handle victory
-          const firstYes = options.querySelector('.btn:not(.hidden):not([data-no-button])');
-          if (firstYes) {
-            firstYes.addEventListener('click', () => {
-              quizState.isComplete = true;
-              advanceToNextCard();
-            });
-          }
-
-          secondYes.addEventListener('click', () => {
-            quizState.isComplete = true;
-            advanceToNextCard();
-          });
-        }
-      }
-    }, 300);
-  }
-
-  // ============================================
-  // Enhanced Score Animation with Particles
-  // ============================================
-  function animateScore() {
-    const scoreDisplay = document.getElementById('scoreDisplay');
-    if (!scoreDisplay) return;
-
-    const target = parseFloat(quizState.score);
-    const duration = 2000;
-    const start = performance.now();
-    let lastParticleValue = 0;
-
-    // Add counting class for pulse effect
-    scoreDisplay.classList.add('counting');
-
-    function update(currentTime) {
-      const elapsed = currentTime - start;
-      const progress = Math.min(elapsed / duration, 1);
-
-      // Ease out quad
-      const eased = 1 - (1 - progress) * (1 - progress);
-      const currentValue = target * eased;
-
-      scoreDisplay.textContent = currentValue.toFixed(1) + '%';
-
-      // Spawn particle every 10%
-      if (Math.floor(currentValue / 10) > lastParticleValue) {
-        lastParticleValue = Math.floor(currentValue / 10);
-        SoundManager.play('tick');
-        spawnScoreParticle(scoreDisplay, '+' + Math.floor(currentValue / 10) * 10);
-      }
-
-      if (progress < 1) {
-        requestAnimationFrame(update);
-      } else {
-        // Complete - add celebration effect
-        scoreDisplay.classList.remove('counting');
-        scoreDisplay.classList.add('complete');
-        scoreDisplay.style.textShadow = '0 0 50px rgba(255, 20, 147, 0.8)';
-
-        // Small confetti burst on score complete
-        spawnMiniConfetti(scoreDisplay);
-      }
-    }
-
-    requestAnimationFrame(update);
-  }
-
-  function spawnScoreParticle(parent, text) {
-    const particle = document.createElement('span');
-    particle.className = 'score-particle';
-    particle.textContent = text;
-    particle.style.left = (Math.random() * 60 + 20) + '%';
-    particle.style.top = '50%';
-    parent.appendChild(particle);
-
-    setTimeout(() => particle.remove(), 800);
-  }
-
-  function spawnMiniConfetti(element) {
-    const rect = element.getBoundingClientRect();
-    const colors = ['#FF1493', '#FF69B4', '#FFB6C1', '#FFD700'];
-
-    for (let i = 0; i < 12; i++) {
-      const confetti = document.createElement('div');
-      confetti.className = 'confetti circle';
-      confetti.style.setProperty('--color', colors[Math.floor(Math.random() * colors.length)]);
-      confetti.style.setProperty('--size', (Math.random() * 6 + 4) + 'px');
-      confetti.style.setProperty('--duration', (Math.random() * 0.8 + 0.6) + 's');
-      confetti.style.setProperty('--sway', (Math.random() - 0.5) * 60 + 'px');
-      confetti.style.left = rect.left + rect.width / 2 + (Math.random() - 0.5) * 100 + 'px';
-      confetti.style.top = rect.top + 'px';
-
-      document.body.appendChild(confetti);
-      setTimeout(() => confetti.remove(), 1500);
     }
   }
 
